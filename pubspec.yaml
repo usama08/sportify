@@ -1,0 +1,64 @@
+name: sportify
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  
+  font_awesome_flutter: ^10.6.0
+  emoji_picker_flutter: ^1.6.3
+  url_launcher: ^6.2.1
+  image_picker: ^1.0.4
+  flutter_svg: ^2.0.9
+  get: ^4.6.6
+  sizer: ^2.0.15
+  flutter_lints: ^3.0.1
+  share_plus: ^7.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+    - assets/spimages/
+    - assets/spsvg/
+    - assets/images/
+    - assets/images/home_image/
+    - assets/images/icon/
+    - assets/images/sports_product/
+    - assets/images/bottom/
+    - assets/images/svg/
+
+
+
+  fonts:
+    - family: Rubik
+      fonts:
+        - asset: assets/fonts/Rubik-Regular.ttf
+    - family: RubikMeduum
+      fonts:
+          - asset: assets/fonts/Rubik-Medium.ttf
+
+
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
