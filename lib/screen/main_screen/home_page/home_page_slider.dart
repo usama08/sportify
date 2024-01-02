@@ -131,7 +131,7 @@ class _HomePageSliderState extends State<HomePageSlider> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: currentIndex == index
-              ? const Color(0xff50C2C9)
+              ? AppStyles.primary
               : const Color(0xffD9D9D9)),
     );
   }

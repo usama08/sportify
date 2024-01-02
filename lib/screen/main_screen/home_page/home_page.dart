@@ -140,32 +140,6 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 10.sp),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(
-                                  () => const InboxScreen(initialTabIndex: 1));
-                            },
-                            child: Image.asset(
-                              ImageAssetPath.homePeople,
-                              height: 38.sp,
-                              width: 38.sp,
-                              fit: BoxFit.fill,
-                              filterQuality: FilterQuality.high,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'People',
-                            style: AppStyles.smallTextStyle.copyWith(
-                                color: AppStyles.black.withOpacity(0.75),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10.sp),
-                          ),
                         ],
                       ),
                       Column(
@@ -188,32 +162,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text(
                             'Coach',
-                            style: AppStyles.smallTextStyle.copyWith(
-                                color: AppStyles.black.withOpacity(0.75),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10.sp),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(() =>
-                                  const ActivityHomeScreen(initialTabIndex: 3));
-                            },
-                            child: Image.asset(
-                              ImageAssetPath.homeGroups,
-                              height: 38.sp,
-                              width: 38.sp,
-                              fit: BoxFit.fill,
-                              filterQuality: FilterQuality.high,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'Team',
                             style: AppStyles.smallTextStyle.copyWith(
                                 color: AppStyles.black.withOpacity(0.75),
                                 fontWeight: FontWeight.bold,
@@ -245,31 +193,6 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 10.sp),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(() => const RackingHomeScreen());
-                            },
-                            child: Image.asset(
-                              ImageAssetPath.homeRanking,
-                              height: 38.sp,
-                              width: 38.sp,
-                              fit: BoxFit.fill,
-                              filterQuality: FilterQuality.high,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'Ranking',
-                            style: AppStyles.smallTextStyle.copyWith(
-                                color: AppStyles.black.withOpacity(0.75),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10.sp),
-                          ),
                         ],
                       ),
                       Column(
@@ -291,31 +214,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text(
                             'Store',
-                            style: AppStyles.smallTextStyle.copyWith(
-                                color: AppStyles.black.withOpacity(0.75),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10.sp),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(() => const ProductMainScreen());
-                            },
-                            child: Image.asset(
-                              ImageAssetPath.homeProduct,
-                              height: 38.sp,
-                              width: 38.sp,
-                              fit: BoxFit.fill,
-                              filterQuality: FilterQuality.high,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'Product',
                             style: AppStyles.smallTextStyle.copyWith(
                                 color: AppStyles.black.withOpacity(0.75),
                                 fontWeight: FontWeight.bold,

@@ -28,10 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          ImageAssetPath.splash,
-          fit: BoxFit.fill,
-          height: 80.sp,
-          width: 170.sp,
+          'assets/images/home_image/splashh.gif',
           filterQuality: FilterQuality.high,
         ),
       ),

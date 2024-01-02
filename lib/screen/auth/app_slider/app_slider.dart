@@ -19,7 +19,7 @@ class SliderPages {
 }
 
 class AppSlider extends StatefulWidget {
-  const AppSlider({Key? key}) : super(key: key);
+  const AppSlider({super.key});
 
   @override
   State<AppSlider> createState() => _AppSliderState();
@@ -45,14 +45,14 @@ class _AppSliderState extends State<AppSlider> {
           'Find the people at your skill level. Join a \n sports group to organize activities \n and inspire each other.',
     ),
     SliderPages(
-      image: 'assets/images/home_image/sliders12.png',
+      image: 'assets/images/home_image/scorre.png',
       title: 'Get better at your sports',
       subTitle:
           'Played  a good game? Track the score,\n exchanges badges and compete \n in a friendly leaderboard.',
     ),
     SliderPages(
       image: 'assets/images/home_image/sliderss2.png',
-      title: 'The easier way  to organize tournaments',
+      title: 'The easier way to organize tournaments',
       subTitle:
           'Played  a good game? Track the score,\n exchanges badges and compete \n in a friendly leaderboard.',
     ),
@@ -98,7 +98,7 @@ class _AppSliderState extends State<AppSlider> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(slider[index].image),
-                      SizedBox(height: index == 0 ? 160 : 20),
+                      SizedBox(height: 50),
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: Text(

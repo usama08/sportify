@@ -46,8 +46,8 @@ class ImageAssetPath {
   static const String profilebaner = 'assets/images/home_image/banner.png';
   static const String homeNearbyActivityR = 'assets/images/home_image/r.png';
   static const String groupTab = 'assets/images/home_image/group_image.png';
-  static const String mainslider1 = 'assets/images/home_image/sliders1.png';
-  static const String mainslider2 = 'assets/images/home_image/sliders12.png';
+  static const String mainslider1 = 'assets/images/home_image/sliders2.png';
+  static const String mainslider2 = 'assets/images/home_image/sliderss2.png';
   static const String rackingStart = 'assets/images/home_image/rank.png';
   static const String slider1 = 'assets/images/home_image/slider.png';
 
