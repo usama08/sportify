@@ -11,6 +11,8 @@ import '../../widget/social_sing_widget.dart';
 
 import 'package:sizer/sizer.dart';
 
+import '../auth/controller/auth_controller.dart';
+
 class SingUpWithYourGoogle extends StatefulWidget {
   const SingUpWithYourGoogle({Key? key}) : super(key: key);
 
@@ -19,6 +21,7 @@ class SingUpWithYourGoogle extends StatefulWidget {
 }
 
 class _SingUpWithYourGoogleState extends State<SingUpWithYourGoogle> {
+  var authcntroller = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +61,7 @@ class _SingUpWithYourGoogleState extends State<SingUpWithYourGoogle> {
                 children: [
                   InkWell(
                     onTap: () {
+                      authcntroller.getLocation(context);
                       Get.to(() => const SingUpScreen());
                     },
                     child: Text(

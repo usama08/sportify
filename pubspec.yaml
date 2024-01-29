@@ -11,10 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
   cupertino_icons: ^1.0.2
-  
   font_awesome_flutter: ^10.6.0
   emoji_picker_flutter: ^1.6.3
   url_launcher: ^6.2.1
@@ -24,6 +21,10 @@ dependencies:
   sizer: ^2.0.15
   flutter_lints: ^3.0.1
   share_plus: ^7.2.1
+  http: ^1.2.0
+  fluttertoast: ^8.2.4
+  geolocator: ^10.1.0
+  permission_handler: ^11.2.0
 
 dev_dependencies:
   flutter_test:

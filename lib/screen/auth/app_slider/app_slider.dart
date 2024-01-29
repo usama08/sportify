@@ -1,4 +1,3 @@
-// ignore_for_file: camel_case_types, file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -19,7 +18,7 @@ class SliderPages {
 }
 
 class AppSlider extends StatefulWidget {
-  const AppSlider({super.key});
+  const AppSlider({Key? key}) : super(key: key);
 
   @override
   State<AppSlider> createState() => _AppSliderState();
@@ -27,8 +26,6 @@ class AppSlider extends StatefulWidget {
 
 class _AppSliderState extends State<AppSlider> {
   int currentIndex = 0;
-
-  final PageController _sliderController = PageController(initialPage: 0);
   late PageController _controller;
 
   List<SliderPages> slider = [
@@ -36,7 +33,7 @@ class _AppSliderState extends State<AppSlider> {
       image: 'assets/images/home_image/sliders2.png',
       title: 'The community for sports players',
       subTitle:
-          'We help sports players to build their\n personalized profile building\nfor sports',
+          'We help sports players to build their\n personalized profile building\n for sports',
     ),
     SliderPages(
       image: 'assets/images/home_image/sliders12.png',
@@ -48,13 +45,13 @@ class _AppSliderState extends State<AppSlider> {
       image: 'assets/images/home_image/scorre.png',
       title: 'Get better at your sports',
       subTitle:
-          'Played  a good game? Track the score,\n exchanges badges and compete \n in a friendly leaderboard.',
+          'Played a good game? Track the score,\n exchange badges and compete \n in a friendly leaderboard.',
     ),
     SliderPages(
       image: 'assets/images/home_image/sliderss2.png',
       title: 'The easier way to organize tournaments',
       subTitle:
-          'Played  a good game? Track the score,\n exchanges badges and compete \n in a friendly leaderboard.',
+          'Played a good game? Track the score,\n exchange badges and compete \n in a friendly leaderboard.',
     ),
   ];
 
@@ -86,39 +83,43 @@ class _AppSliderState extends State<AppSlider> {
                 controller: _controller,
                 scrollDirection: Axis.horizontal,
                 onPageChanged: (value) {
-                  if (mounted) {
-                    setState(() {
-                      currentIndex = value;
-                    });
-                  }
+                  setState(() {
+                    currentIndex = value;
+                  });
                 },
                 itemCount: slider.length,
                 itemBuilder: (context, index) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(slider[index].image),
-                      SizedBox(height: 50),
+                      SizedBox(
+                        height: 45.h, // Adjust height as per requirement
+                        width: double.infinity,
+                        child: Image.asset(
+                          slider[index].image,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: Text(
-                          textAlign: TextAlign.center,
                           slider[index].title,
+                          textAlign: TextAlign.center,
                           style: AppStyles.sliderText.copyWith(
-                            color: AppStyles.black.withOpacity(0.75),
+                            color: AppColors.BlackColor.withOpacity(0.75),
                             fontSize: 14.sp,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 2.h),
                       Padding(
-                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        padding: EdgeInsets.symmetric(horizontal: 8.w),
                         child: Text(
-                          textAlign: TextAlign.center,
                           slider[index].subTitle,
+                          textAlign: TextAlign.center,
                           style: AppStyles.sliderText.copyWith(
                             fontSize: 10.sp,
-                            color: AppStyles.black.withOpacity(0.74),
+                            color: AppColors.BlackColor.withOpacity(0.74),
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -131,7 +132,7 @@ class _AppSliderState extends State<AppSlider> {
             Expanded(
               flex: 1,
               child: Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -153,20 +154,19 @@ class _AppSliderState extends State<AppSlider> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
                         slider.length,
-                        (index) => buildDot(index, context),
+                        (index) => buildDot(index),
                       ),
                     ),
                     InkWell(
                       onTap: () {
-                        if (currentIndex == slider.length - 1) {
+                        if (currentIndex == 3) {
                           Get.to(() => const SingUpWithYourGoogle());
-                        } else if (_sliderController.positions.isNotEmpty) {
-                          _sliderController.nextPage(
+                        } else {
+                          _controller.nextPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut,
                           );
                         }
-                        // Add an else block or additional logic if needed for cases when positions are empty.
                       },
                       child: Text(
                         'Next',
@@ -177,7 +177,7 @@ class _AppSliderState extends State<AppSlider> {
                           fontSize: 13.sp,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -188,7 +188,7 @@ class _AppSliderState extends State<AppSlider> {
     );
   }
 
-  Container buildDot(int index, BuildContext context) {
+  Container buildDot(int index) {
     return Container(
       height: 8,
       width: currentIndex == index ? 38 : 8,
