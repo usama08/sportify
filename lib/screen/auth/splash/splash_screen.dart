@@ -40,6 +40,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToHome() {
-    Get.offAll(AppSlider());
+    Get.offAll(const AppSlider());
   }
 }

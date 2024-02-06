@@ -24,7 +24,7 @@ class AppColors {
 
   ///homescreen colors
   static const bottomNavigationbg = Color(0xff45575B);
-  static const redColor = Color.fromARGB(255, 143, 3, 3);
+  static const redColor = Color.fromARGB(255, 249, 44, 44);
 
   /// Action Button Color
   static const actionbut = Color(0xffED225C);
@@ -32,4 +32,7 @@ class AppColors {
 
   // selected color
   static const primary = Color(0xffEB7724);
+  static const border = Color(0xffC7C7CC);
+  static const textcolor = Color(0xff8E8E93);
+  static const heading = Color(0xff636366);
 }

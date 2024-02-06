@@ -14,7 +14,7 @@ import 'package:sizer/sizer.dart';
 import '../auth/controller/auth_controller.dart';
 
 class SingUpWithYourGoogle extends StatefulWidget {
-  const SingUpWithYourGoogle({Key? key}) : super(key: key);
+  const SingUpWithYourGoogle({super.key});
 
   @override
   State<SingUpWithYourGoogle> createState() => _SingUpWithYourGoogleState();
@@ -43,7 +43,36 @@ class _SingUpWithYourGoogleState extends State<SingUpWithYourGoogle> {
               SizedBox(
                 height: 40.sp,
               ),
-              const LoginWithSocial(),
+              Align(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => const LoginScreen());
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 40.sp,
+                    width: 258.sp,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          offset: const Offset(0, 4),
+                          blurRadius: 4,
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      'Sign in  ',
+                      style: AppStyles.smallTextStyle
+                          .copyWith(color: AppStyles.primary, fontSize: 13.sp),
+                    ),
+                  ),
+                ),
+              ),
+              // const LoginWithSocial(),
               SizedBox(
                 height: 10.sp,
               ),
@@ -55,37 +84,39 @@ class _SingUpWithYourGoogleState extends State<SingUpWithYourGoogle> {
               SizedBox(
                 height: 10.sp,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      authcntroller.getLocation(context);
-                      Get.to(() => const SingUpScreen());
-                    },
+              Align(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    authcntroller.getLocation(context);
+                    Get.to(() => const SingUpScreen());
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 40.sp,
+                    width: 258.sp,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          offset: const Offset(0, 4),
+                          blurRadius: 4,
+                        ),
+                      ],
+                    ),
                     child: Text(
-                      'Sign Up  ',
+                      'Sign up',
                       style: AppStyles.smallTextStyle
                           .copyWith(color: AppStyles.primary, fontSize: 13.sp),
                     ),
                   ),
-                  Text(
-                    'OR  ',
-                    style: AppStyles.smallTextStyle
-                        .copyWith(color: AppStyles.black, fontSize: 15.sp),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const LoginScreen());
-                    },
-                    child: Text(
-                      'Sign in',
-                      style: AppStyles.smallTextStyle
-                          .copyWith(color: AppStyles.primary, fontSize: 13.sp),
-                    ),
-                  ),
-                ],
+                ),
+              ),
+
+              SizedBox(
+                height: 10.sp,
               ),
             ],
           ),

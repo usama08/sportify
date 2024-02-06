@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sportify/constants/app_color.dart';
+import 'package:sportify/constants/custom_dropdown.dart';
 import 'package:sportify/screen/auth/controller/auth_controller.dart';
 import 'package:sportify/screen/auth/login_screen/loign_screen.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get/get.dart';
+import 'package:sportify/widget/heading.dart';
 import 'package:sportify/widget/show_toast.dart';
 import '../../../constants/asset_path.dart';
 import '../../../utils/app_styles.dart';
@@ -24,7 +26,12 @@ class _SingUpScreenState extends State<SingUpScreen> {
   @override
   void initState() {
     super.initState();
+    fetchAllStates();
     authcntroller.getLocation(context);
+  }
+
+  void fetchAllStates() async {
+    await authcntroller.fetchUniversityList();
   }
 
   @override
@@ -67,47 +74,80 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 Positioned(
                   top: 100.sp,
                   left: 100.sp,
-                  child: Text('Welcome!${authcntroller.latitude.toString()}',
+                  child: Text('Welcome!',
                       style: AppStyles.sliderText.copyWith(
                         fontSize: 16.sp,
                       )),
                 ),
               ],
             ),
-            SizedBox(
-              height: 25.sp,
-            ),
+
+            heading(context, 'Name', false),
+            SizedBox(height: 5.sp),
             AppTextField(
               textEditingController: authcntroller.username,
               hintText: 'Enter your full name',
             ),
             SizedBox(
-              height: 20.sp,
+              height: 10.sp,
             ),
-            Center(
-                child: AppTextField(
-              textEditingController: authcntroller.institutename,
-              hintText: 'Enter Institute name',
-            )),
+            heading(context, 'University', true),
+            SizedBox(height: 5.sp),
+            CustomDropdown(
+              height: 40.sp,
+              width: MediaQuery.of(context).size.width,
+              onchangedF: (String? newValue) {
+                setState(() {
+                  authcntroller.universityname = newValue!;
+                });
+              },
+              selectedValue: authcntroller.universityname,
+              // "Select Policy Type.........."
+              values: [
+                'Select University',
+                // ignore: invalid_use_of_protected_member
+                ...authcntroller.universitylist.value
+                    .map((university) => university.universityName)
+                    .toList()
+              ],
+              labels: [
+                'Select University',
+                // ignore: invalid_use_of_protected_member
+                ...authcntroller.universitylist.value
+                    .map((university) => university.universityName)
+                    .toList()
+              ],
+            ),
+            // Center(
+            //     child: AppTextField(
+            //   textEditingController: authcntroller.institutename,
+            //   hintText: 'Enter Institute name',
+            // )),
             SizedBox(
-              height: 20.sp,
+              height: 10.sp,
             ),
+            heading(context, 'ID', true),
+            SizedBox(height: 5.sp),
             Center(
                 child: AppTextField(
               textEditingController: authcntroller.instituteId,
               hintText: 'Enter your Institute ID',
             )),
             SizedBox(
-              height: 20.sp,
+              height: 10.sp,
             ),
+            heading(context, 'Email', false),
+            SizedBox(height: 5.sp),
             Center(
                 child: AppTextField(
               textEditingController: authcntroller.email,
               hintText: 'Enter your email',
             )),
             SizedBox(
-              height: 20.sp,
+              height: 10.sp,
             ),
+            heading(context, 'Phone', false),
+            SizedBox(height: 5.sp),
             Center(
                 child: AppTextField(
               textEditingController: authcntroller.phoneNumber,
@@ -116,6 +156,8 @@ class _SingUpScreenState extends State<SingUpScreen> {
             SizedBox(
               height: 10.sp,
             ),
+            heading(context, 'Password', false),
+            SizedBox(height: 5.sp),
             Center(
                 child: AppTextField(
               textEditingController: authcntroller.password,
@@ -124,56 +166,22 @@ class _SingUpScreenState extends State<SingUpScreen> {
             SizedBox(
               height: 20.sp,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: AppButton(
-                background: AppStyles.primary,
-                text: 'SIGN UP',
-                onClicked: () {
-                  if (authcntroller.email.text.trim().isEmpty) {
-                    ToastWidget.show('Email is Empty', context,
-                        backgroundColor: AppColors.redColor);
-                  } else if (authcntroller.username.text.trim().isEmpty) {
-                    ToastWidget.show('Username is Empty', context,
-                        backgroundColor: AppColors.redColor);
-                  } else if (authcntroller.institutename.text.trim().isEmpty) {
-                    ToastWidget.show('Institute name is Empty', context,
-                        backgroundColor: AppColors.redColor);
-                  } else if (authcntroller.instituteId.text.trim().isEmpty) {
-                    ToastWidget.show('Institute id is Empty', context,
-                        backgroundColor: AppColors.redColor);
-                  } else if (authcntroller.phoneNumber.text.trim().isEmpty) {
-                    ToastWidget.show('Phone Number is Empty', context,
-                        backgroundColor: AppColors.redColor);
-                  } else if (authcntroller.password.text.trim().isEmpty) {
-                    ToastWidget.show('Password is Empty', context,
-                        backgroundColor: AppColors.redColor);
-                  } else if (!authcntroller.password.text
-                      .trim()
-                      .contains(RegExp(r'[A-Z]'))) {
-                    ToastWidget.show(
-                        'Password must contain at least one uppercase letter',
-                        context,
-                        backgroundColor: AppColors.redColor);
-                    return;
-                  } else if (!authcntroller.password.text
-                      .trim()
-                      .contains(RegExp(r'[@\$#%&!]'))) {
-                    ToastWidget.show(
-                        'Password must contain at least one symbol', context,
-                        backgroundColor: AppColors.redColor);
-                    return;
-                  } else if (authcntroller.password.text.trim().length < 8) {
-                    ToastWidget.show(
-                        'Password must contain at least 8 characters', context,
-                        backgroundColor: AppColors.redColor);
-                    return;
-                  } else {
-                    Get.to(() => const LoginScreen());
-                  }
-                },
-              ),
-            ),
+            Obx(() {
+              return Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: authcntroller.isLoading.value != false
+                    ? const Center(
+                        child:
+                            CircularProgressIndicator(color: AppColors.primary),
+                      )
+                    : AppButton(
+                        background: AppStyles.primary,
+                        text: 'SIGN UP',
+                        onClicked: () {
+                          authcntroller.makeSignUpRequest();
+                        }),
+              );
+            }),
             SizedBox(
               height: 15.sp,
             ),
@@ -197,6 +205,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 10.sp),
           ],
         ),
       ),

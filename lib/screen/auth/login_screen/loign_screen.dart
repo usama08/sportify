@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 // import '../../../widget/social_sing_widget.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sizer/sizer.dart';
+import 'package:sportify/widget/heading.dart';
 import 'package:sportify/widget/show_toast.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -84,6 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 20,
             ),
+            heading(context, 'Email', false),
+            SizedBox(height: 5.sp),
             Center(
                 child: AppTextField(
               textEditingController: authcntroller.email,
@@ -92,7 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 30,
             ),
-
+            heading(context, 'Password', false),
+            SizedBox(height: 5.sp),
             Center(
                 child: AppTextField(
               textEditingController: authcntroller.password,
@@ -165,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   backgroundColor: AppColors.redColor);
                               return;
                             } else {
-                              await authcntroller.loginApi();
+                              await authcntroller.loginApi(context);
                             }
                           },
                           background: AppStyles.primary,

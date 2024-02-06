@@ -4,7 +4,7 @@ class Apis {
 
   //// login api  //
   static const logInApi = '${baseUrl}user/login';
-
+  static const signUpApi = '${baseUrl}user/signup';
   //// status total requested /////
 
   /////  GET QUARRY DATA  ////
