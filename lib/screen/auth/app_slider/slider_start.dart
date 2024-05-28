@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:sportify/constants/app_color.dart';
 import 'package:sportify/constants/asset_path.dart';
+import 'package:sportify/screen/auth/controller/auth_controller.dart';
+import 'package:sportify/screen/auth/login_screen/loign_screen.dart';
 import 'package:sportify/utils/app_styles.dart';
 import 'package:sportify/widget/app_button.dart';
 // ignore: depend_on_referenced_packages
-import 'package:get/get.dart';
-import '../../main_screen.dart';
 
 class SliderStart extends StatefulWidget {
   const SliderStart({Key? key}) : super(key: key);
@@ -14,6 +17,13 @@ class SliderStart extends StatefulWidget {
 }
 
 class _SliderStartState extends State<SliderStart> {
+  var authcntroller = Get.put(AuthController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,15 +63,22 @@ class _SliderStartState extends State<SliderStart> {
           const SizedBox(
             height: 80,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: AppButton(
-                onClicked: () {
-                  Get.to(() => const MainPage());
-                },
-                background: AppStyles.primary,
-                text: "LET’S GO"),
-          ),
+          Obx(() {
+            return Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: authcntroller.isLoading.value != false
+                  ? const Center(
+                      child:
+                          CircularProgressIndicator(color: AppColors.primary),
+                    )
+                  : AppButton(
+                      onClicked: () async {
+                        authcntroller.loginApi(context);
+                      },
+                      background: AppStyles.primary,
+                      text: "LET’S GO"),
+            );
+          }),
         ],
       ),
     );

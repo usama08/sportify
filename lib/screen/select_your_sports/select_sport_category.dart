@@ -1,5 +1,6 @@
 import 'package:sportify/constants/app_color.dart';
 import 'package:sportify/constants/asset_path.dart';
+import 'package:sportify/screen/auth/controller/auth_controller.dart';
 import 'package:sportify/screen/auth/sing_up/addyourphoto.dart';
 import 'package:sportify/screen/select_your_sports/controller/sportcontroller.dart';
 import 'package:sportify/widget/app_button.dart';
@@ -13,8 +14,7 @@ import 'package:sizer/sizer.dart';
 class SelectSportCategory extends StatefulWidget {
   final String gamename;
 
-  const SelectSportCategory({Key? key, required this.gamename})
-      : super(key: key);
+  const SelectSportCategory({super.key, required this.gamename});
 
   @override
   State<SelectSportCategory> createState() => _SelectSportCategoryState();
@@ -22,10 +22,20 @@ class SelectSportCategory extends StatefulWidget {
 
 class _SelectSportCategoryState extends State<SelectSportCategory> {
   var controllersport = Get.put(SportSelection());
+  var controller = Get.put(AuthController());
+
   @override
   void initState() {
     super.initState();
+    fetchAllStates();
+
+    controller.gamename = widget.gamename;
+    print('game${controller.gamename}');
     // datecontroller.DatePicker();
+  }
+
+  void fetchAllStates() async {
+    controller.getgamecatgoryID();
   }
 
   @override
@@ -129,6 +139,8 @@ class _SelectSportCategoryState extends State<SelectSportCategory> {
                 padding: const EdgeInsets.only(left: 10, right: 10, top: 60),
                 child: AppButton(
                     onClicked: () {
+                      controller.getgamecatgoryID();
+
                       Get.offAll(() => const AddYourPhoto());
                     },
                     background: AppStyles.primary,

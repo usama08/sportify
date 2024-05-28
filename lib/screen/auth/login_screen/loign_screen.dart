@@ -143,15 +143,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .isEmpty) {
                               ToastWidget.show('Password is Empty', context,
                                   backgroundColor: AppColors.redColor);
-                            } else if (!authcntroller.password.text
-                                .trim()
-                                .contains(RegExp(r'[A-Z]'))) {
-                              ToastWidget.show(
-                                  'Password must contain at least one uppercase letter',
-                                  context,
-                                  backgroundColor: AppColors.redColor);
-                              return;
-                            } else if (!authcntroller.password.text
+                            }
+                            // else if (!authcntroller.password.text
+                            //     .trim()
+                            //     .contains(RegExp(r'[A-Z]'))) {
+                            //   ToastWidget.show(
+                            //       'Password must contain at least one uppercase letter',
+                            //       context,
+                            //       backgroundColor: AppColors.redColor);
+                            //   return;
+                            // }
+                            else if (!authcntroller.password.text
                                 .trim()
                                 .contains(RegExp(r'[@\$#%&!]'))) {
                               ToastWidget.show(

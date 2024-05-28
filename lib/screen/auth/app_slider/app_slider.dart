@@ -18,7 +18,7 @@ class SliderPages {
 }
 
 class AppSlider extends StatefulWidget {
-  const AppSlider({Key? key}) : super(key: key);
+  const AppSlider({super.key});
 
   @override
   State<AppSlider> createState() => _AppSliderState();

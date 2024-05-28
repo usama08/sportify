@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sportify/constants/app_color.dart';
 import 'package:sportify/constants/custom_dropdown.dart';
 import 'package:sportify/screen/auth/controller/auth_controller.dart';
-import 'package:sportify/screen/auth/login_screen/loign_screen.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get/get.dart';
+import 'package:sportify/screen/select_your_sports/sport_select_screen.dart';
 import 'package:sportify/widget/heading.dart';
-import 'package:sportify/widget/show_toast.dart';
 import '../../../constants/asset_path.dart';
 import '../../../utils/app_styles.dart';
 import '../../../widget/app_button.dart';
@@ -26,12 +25,13 @@ class _SingUpScreenState extends State<SingUpScreen> {
   @override
   void initState() {
     super.initState();
-    fetchAllStates();
+    fetchAllStates(context);
     authcntroller.getLocation(context);
   }
 
-  void fetchAllStates() async {
+  void fetchAllStates(BuildContext context) async {
     await authcntroller.fetchUniversityList();
+    await authcntroller.getAllCategories(context);
   }
 
   @override
@@ -91,7 +91,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             SizedBox(
               height: 10.sp,
             ),
-            heading(context, 'University', true),
+            heading(context, 'University/Sports Club', true),
             SizedBox(height: 5.sp),
             CustomDropdown(
               height: 40.sp,
@@ -99,19 +99,20 @@ class _SingUpScreenState extends State<SingUpScreen> {
               onchangedF: (String? newValue) {
                 setState(() {
                   authcntroller.universityname = newValue!;
+                  authcntroller.geUniversityID();
                 });
               },
               selectedValue: authcntroller.universityname,
               // "Select Policy Type.........."
               values: [
-                'Select University',
+                'Select University/Sports Club',
                 // ignore: invalid_use_of_protected_member
                 ...authcntroller.universitylist.value
                     .map((university) => university.universityName)
                     .toList()
               ],
               labels: [
-                'Select University',
+                'Select University/Sports Club',
                 // ignore: invalid_use_of_protected_member
                 ...authcntroller.universitylist.value
                     .map((university) => university.universityName)
@@ -130,8 +131,8 @@ class _SingUpScreenState extends State<SingUpScreen> {
             SizedBox(height: 5.sp),
             Center(
                 child: AppTextField(
-              textEditingController: authcntroller.instituteId,
-              hintText: 'Enter your Institute ID',
+              textEditingController: authcntroller.studentid,
+              hintText: 'Enter your Student ID',
             )),
             SizedBox(
               height: 10.sp,
@@ -176,9 +177,9 @@ class _SingUpScreenState extends State<SingUpScreen> {
                       )
                     : AppButton(
                         background: AppStyles.primary,
-                        text: 'SIGN UP',
+                        text: 'NEXT',
                         onClicked: () {
-                          authcntroller.makeSignUpRequest();
+                          Get.to(const SportSelectScreen());
                         }),
               );
             }),

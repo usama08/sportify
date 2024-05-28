@@ -1,15 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 // ignore: depend_on_referenced_packages
 import 'package:image_picker/image_picker.dart';
+import 'package:sportify/constants/app_color.dart';
 import 'package:sportify/constants/asset_path.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get/get.dart';
-import 'package:sportify/screen/location_set/set_your_location.dart';
+import 'package:sportify/screen/auth/controller/auth_controller.dart';
 import 'package:sportify/widget/app_button.dart';
 import '../../../utils/app_styles.dart';
 import '../../../widget/male_female_btn.dart';
-import '../app_slider/slider_start.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sizer/sizer.dart';
 
@@ -21,7 +22,7 @@ class AddYourPhoto extends StatefulWidget {
 }
 
 class _AddYourPhotoState extends State<AddYourPhoto> {
-  File? _selectedImage;
+  var controller = Get.put(AuthController());
 
   Future<void> _selectImage() async {
     final picker = ImagePicker();
@@ -44,7 +45,7 @@ class _AddYourPhotoState extends State<AddYourPhoto> {
                     );
                     if (pickedImage != null) {
                       setState(() {
-                        _selectedImage = File(pickedImage.path);
+                        controller.file = File(pickedImage.path);
                       });
                     }
                   },
@@ -62,7 +63,7 @@ class _AddYourPhotoState extends State<AddYourPhoto> {
                     );
                     if (pickedImage != null) {
                       setState(() {
-                        _selectedImage = File(pickedImage.path);
+                        controller.file = File(pickedImage.path);
                       });
                     }
                   },
@@ -97,9 +98,9 @@ class _AddYourPhotoState extends State<AddYourPhoto> {
                 right: 10.sp,
                 child: Row(
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pop();
+                        Get.back();
                       },
                       child: Icon(
                         Icons.arrow_back_outlined,
@@ -153,14 +154,14 @@ class _AddYourPhotoState extends State<AddYourPhoto> {
           Center(
             child: InkWell(
               onTap: _selectImage,
-              child: _selectedImage != null
+              child: controller.file != null
                   ? Container(
                       width: 100.sp,
                       height: 100.sp,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: FileImage(_selectedImage!),
+                          image: FileImage(controller.file!),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -202,83 +203,91 @@ class _AddYourPhotoState extends State<AddYourPhoto> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MaleFemaleBtn(
-                  text: 'Male',
+                  text: 'male',
                   isSelected: _isBeginnerSelected,
-                  onClicked: () => _handleSelection(true, false),
+                  onClicked: () => _handleSelection(
+                      'male'), // Pass 'Male' when Male button is clicked
                 ),
                 MaleFemaleBtn(
-                  text: 'Female',
+                  text: 'female',
                   isSelected: _isIntermediateSelected,
-                  onClicked: () => _handleSelection(false, true),
+                  onClicked: () => _handleSelection(
+                      'female'), // Pass 'Female' when Female button is clicked
                 ),
               ],
             ),
           ),
-          SizedBox(
-            height: 30.sp,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.location_on,
-                color: Colors.black,
-                size: 15.sp,
-              ),
-              SizedBox(
-                width: 5.sp,
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(() => const SetLocation());
-                },
-                child: Text(
-                  'Change your location',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                  ),
-                ),
-              )
-            ],
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 25),
-            child: SizedBox(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppStyles.primary, width: 2.5),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                    child: Text(
-                      'BIRMINGHAM',
-                      style: TextStyle(
-                        color: AppStyles.primary,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
-            child: AppButton(
-                onClicked: () {
-                  Get.to(() => const SliderStart());
-                },
-                background: AppStyles.primary,
-                text: 'NEXT'),
-          ),
+          SizedBox(height: 15.h),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Icon(
+          //       Icons.location_on,
+          //       color: Colors.black,
+          //       size: 15.sp,
+          //     ),
+          //     SizedBox(
+          //       width: 5.sp,
+          //     ),
+          //     InkWell(
+          //       onTap: () {
+          //         Get.to(() => const SetLocation());
+          //       },
+          //       child: Text(
+          //         'Change your location',
+          //         style: TextStyle(
+          //           fontSize: 12.sp,
+          //         ),
+          //       ),
+          //     )
+          //   ],
+          // ),
+          // Padding(
+          //   padding:
+          //       const EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 25),
+          //   child: SizedBox(
+          //     height: 60,
+          //     width: MediaQuery.of(context).size.width,
+          //     child: InkWell(
+          //       onTap: () {},
+          //       child: Container(
+          //         height: 60,
+          //         width: MediaQuery.of(context).size.width,
+          //         decoration: BoxDecoration(
+          //             border: Border.all(color: AppStyles.primary, width: 2.5),
+          //             color: Colors.white,
+          //             borderRadius: BorderRadius.circular(10)),
+          //         child: Center(
+          //           child: Text(
+          //             'BIRMINGHAM',
+          //             style: TextStyle(
+          //               color: AppStyles.primary,
+          //               fontSize: 12.sp,
+          //               fontWeight: FontWeight.w600,
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          Obx(() {
+            return Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
+              child: controller.isLoading.value != false
+                  ? const Center(
+                      child:
+                          CircularProgressIndicator(color: AppColors.primary),
+                    )
+                  : AppButton(
+                      onClicked: () async {
+                        print('hit');
+                        await controller.signUpApi(context);
+                      },
+                      background: AppStyles.primary,
+                      text: 'NEXT'),
+            );
+          }),
         ],
       ),
     );
@@ -287,10 +296,12 @@ class _AddYourPhotoState extends State<AddYourPhoto> {
   bool _isBeginnerSelected = true;
   bool _isIntermediateSelected = false;
 
-  void _handleSelection(bool beginnerSelected, bool intermediateSelected) {
+  void _handleSelection(String gender) {
     setState(() {
-      _isBeginnerSelected = beginnerSelected;
-      _isIntermediateSelected = intermediateSelected;
+      _isBeginnerSelected = gender == 'male';
+      _isIntermediateSelected = gender == 'female';
+      controller.gender = gender;
+      print('value${controller.gender}');
     });
   }
 }

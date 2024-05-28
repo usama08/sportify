@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../constants/asset_path.dart';
 import '../../utils/app_styles.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sizer/sizer.dart';
 
 class CoachTab extends StatefulWidget {
+  // ignore: use_super_parameters
   const CoachTab({Key? key}) : super(key: key);
 
   @override
@@ -13,6 +15,7 @@ class CoachTab extends StatefulWidget {
 
 class _CoachTabState extends State<CoachTab> {
   bool isFavorite = false;
+  String phoneNumber = '+923360502783';
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -115,7 +118,7 @@ class _CoachTabState extends State<CoachTab> {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'Upper Thompson Road, Singapore',
+                                  'Lahore, Pakistan',
                                   style: AppStyles.bigTextStyle.copyWith(
                                       fontSize: 10.sp,
                                       color: AppStyles.black.withOpacity(0.75),
@@ -154,10 +157,13 @@ class _CoachTabState extends State<CoachTab> {
                                 color: AppStyles.primary,
                                 borderRadius: BorderRadius.circular(5.sp)),
                             child: Center(
-                              child: Text(
-                                'View',
-                                style: AppStyles.smallTextStyle.copyWith(
-                                    color: AppStyles.white, fontSize: 11.sp),
+                              child: GestureDetector(
+                                onTap: () => _launchPhoneDialer(phoneNumber),
+                                child: Text(
+                                  'Call',
+                                  style: AppStyles.smallTextStyle.copyWith(
+                                      color: AppStyles.white, fontSize: 11.sp),
+                                ),
                               ),
                             ),
                           ),
@@ -173,5 +179,18 @@ class _CoachTabState extends State<CoachTab> {
             ),
           );
         });
+  }
+
+  _launchPhoneDialer(String phoneNumber) async {
+    try {
+      if (await canLaunch('tel:$phoneNumber')) {
+        // ignore: deprecated_member_use
+        await launch('tel:$phoneNumber');
+      } else {
+        throw 'Could not launch tel:$phoneNumber';
+      }
+    } catch (e) {
+      print('Error launching phone dialer: $e');
+    }
   }
 }

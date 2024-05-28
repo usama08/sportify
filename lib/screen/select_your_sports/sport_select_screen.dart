@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class SportSelectScreen extends StatefulWidget {
-  const SportSelectScreen({Key? key}) : super(key: key);
+  const SportSelectScreen({super.key});
 
   @override
   State<SportSelectScreen> createState() => _SportSelectScreenState();
@@ -17,9 +17,11 @@ class SportSelectScreen extends StatefulWidget {
 
 class _SportSelectScreenState extends State<SportSelectScreen> {
   String? selectedSport;
+
   void handleSportSelected(String sportName) {
     setState(() {
       selectedSport = sportName;
+      print('sport${sportName}');
     });
   }
 
@@ -93,6 +95,7 @@ class _SportSelectScreenState extends State<SportSelectScreen> {
                   onClicked: () {
                     Get.to(
                         () => const SelectSportCategory(gamename: 'Football'));
+                    print('{}');
                   },
                 ),
                 SportSelect(
@@ -193,13 +196,13 @@ class _SportSelectScreenState extends State<SportSelectScreen> {
                   gameImage: ImageAssetPath.rugvy,
                   gameName: 'Rugby',
                   onClicked: () {
-                    Get.to(() => const SelectSportCategory(gamename: 'Rugby'));
+                    Get.to(() => const SelectSportCategory(gamename: 'rugby'));
                   },
                 ),
                 SportSelect(
                   onClicked: () {
                     Get.to(() =>
-                        const SelectSportCategory(gamename: 'Basketball'));
+                        const SelectSportCategory(gamename: 'basketball'));
                   },
                   gameImage: ImageAssetPath.basketball,
                   gameName: 'Basketball',
